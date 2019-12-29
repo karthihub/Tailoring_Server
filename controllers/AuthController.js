@@ -16,7 +16,13 @@ const { constants } = require("../helpers/constants");
  * @param {string}      lastName
  * @param {string}      email
  * @param {string}      password
- *
+ * @param {string}		gender
+ * @param {string}		age
+ * @param {number}		mobilenumber
+ * @param {string}		_IDNO
+ * @param {string}		_IMEI
+ * @param {string}		_FCMT
+ * @param {string}		_IMGP
  * @returns {Object}
  */
 exports.register = [
@@ -33,6 +39,13 @@ exports.register = [
 				}
 			});
 		}),
+	body("gender").isLength({ min: 1 }).trim().withMessage("Gender should not be empty."),
+	body("age").isLength({ min: 1 }).trim().withMessage("Age should not be empty."),
+	body("mobilenumber").isLength({ min: 10 }).trim().withMessage("Mobile Number should not be empty."),
+	body("_IDNO").isLength({ min: 10 }).trim().withMessage("Sorry, something went wrong. please try again later."),
+	body("_IMEI").isLength({ min: 10 }).trim().withMessage("Sorry, something went wrong. please try again later."),
+	body("_FCMT").isLength({ min: 10 }).trim().withMessage("Sorry, something went wrong. please try again later."),
+	body("_IMGP").isLength({ min: 10 }).trim().withMessage("Sorry, something went wrong. please try again later."),
 	body("password").isLength({ min: 6 }).trim().withMessage("Password must be 6 characters or greater."),
 	// Sanitize fields.
 	sanitizeBody("firstName").escape(),
@@ -57,9 +70,16 @@ exports.register = [
 						{
 							firstName: req.body.firstName,
 							lastName: req.body.lastName,
+							gender: req.body.gender,
+							age : req.body.age,
+							mobilenumber : req.body.mobilenumber,
 							email: req.body.email,
 							password: hash,
-							confirmOTP: otp
+							confirmOTP: otp,
+							_IDNO: req.body._IDNO,
+							_IMEI: req.body._IMEI,
+							_FCMT: req.body._FCMT,
+							_IMGP: req.body._IMGP
 						}
 					);
 					// Html email body
