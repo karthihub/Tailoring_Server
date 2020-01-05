@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mailer = require("../helpers/mailer");
 const { constants } = require("../helpers/constants");
+const Strings = require("../helpers/Strings");
 
 /**
  * User registration.
@@ -27,26 +28,26 @@ const { constants } = require("../helpers/constants");
  */
 exports.register = [
 	// Validate fields.
-	body("firstName").isLength({ min: 1 }).trim().withMessage("First name must be specified.")
-		.isAlphanumeric().withMessage("First name has non-alphanumeric characters."),
-	body("lastName").isLength({ min: 1 }).trim().withMessage("Last name must be specified.")
-		.isAlphanumeric().withMessage("Last name has non-alphanumeric characters."),
-	body("email").isLength({ min: 1 }).trim().withMessage("Email must be specified.")
-		.isEmail().withMessage("Email must be a valid email address.").custom((value) => {
+	body("firstName").isLength({ min: 1 }).trim().withMessage(Strings.staticLabel.en.error.error_1)
+		.isAlphanumeric().withMessage(Strings.staticLabel.en.error.error_2),
+	body("lastName").isLength({ min: 1 }).trim().withMessage(Strings.staticLabel.en.error.error_3)
+		.isAlphanumeric().withMessage(Strings.staticLabel.en.error.error_4),
+	body("email").isLength({ min: 1 }).trim().withMessage(Strings.staticLabel.en.error.error_5)
+		.isEmail().withMessage(Strings.staticLabel.en.error.error_6).custom((value) => {
 			return UserModel.findOne({email : value}).then((user) => {
 				if (user) {
-					return Promise.reject("E-mail already in use");
+					return Promise.reject(Strings.staticLabel.en.error.error_7);
 				}
 			});
 		}),
-	body("gender").isLength({ min: 1 }).trim().withMessage("Gender should not be empty."),
-	body("age").isLength({ min: 1 }).trim().withMessage("Age should not be empty."),
-	body("mobilenumber").isLength({ min: 10 }).trim().withMessage("Mobile Number should not be empty."),
-	body("_IDNO").isLength({ min: 10 }).trim().withMessage("Sorry, something went wrong. please try again later."),
-	body("_IMEI").isLength({ min: 10 }).trim().withMessage("Sorry, something went wrong. please try again later."),
-	body("_FCMT").isLength({ min: 10 }).trim().withMessage("Sorry, something went wrong. please try again later."),
-	body("_IMGP").isLength({ min: 10 }).trim().withMessage("Sorry, something went wrong. please try again later."),
-	body("password").isLength({ min: 6 }).trim().withMessage("Password must be 6 characters or greater."),
+	body("gender").isLength({ min: 1 }).trim().withMessage(Strings.staticLabel.en.error.error_8),
+	body("age").isLength({ min: 1 }).trim().withMessage(Strings.staticLabel.en.error.error_9),
+	body("mobilenumber").isLength({ min: 10 }).trim().withMessage(Strings.staticLabel.en.error.error_10),
+	body("_IDNO").isLength({ min: 10 }).trim().withMessage(Strings.staticLabel.en.error.error_11),
+	body("_IMEI").isLength({ min: 10 }).trim().withMessage(Strings.staticLabel.en.error.error_11),
+	body("_FCMT").isLength({ min: 10 }).trim().withMessage(Strings.staticLabel.en.error.error_11),
+	body("_IMGP").isLength({ min: 10 }).trim().withMessage(Strings.staticLabel.en.error.error_11),
+	body("password").isLength({ min: 6 }).trim().withMessage(Strings.staticLabel.en.error.error_12),
 	// Sanitize fields.
 	sanitizeBody("firstName").escape(),
 	sanitizeBody("lastName").escape(),
@@ -80,8 +81,7 @@ exports.register = [
 							_IMEI: req.body._IMEI,
 							_FCMT: req.body._FCMT,
 							_IMGP: req.body._IMGP
-						}
-					);
+						});
 					// Html email body
 					let html = "<p>Please Confirm your Account.</p><p>OTP: "+otp+"</p>";
 					// Send confirmation email
@@ -123,9 +123,9 @@ exports.register = [
  * @returns {Object}
  */
 exports.login = [
-	body("email").isLength({ min: 1 }).trim().withMessage("Email must be specified.")
-		.isEmail().withMessage("Email must be a valid email address."),
-	body("password").isLength({ min: 1 }).trim().withMessage("Password must be specified."),
+	body("email").isLength({ min: 1 }).trim().withMessage(Strings.staticLabel.en.error.error_5)
+		.isEmail().withMessage(Strings.staticLabel.en.error.error_6),
+	body("password").isLength({ min: 1 }).trim().withMessage(Strings.staticLabel.en.error.error_13),
 	sanitizeBody("email").escape(),
 	sanitizeBody("password").escape(),
 	(req, res) => {
@@ -159,17 +159,17 @@ exports.login = [
 										userData.token = jwt.sign(jwtPayload, secret, jwtData);
 										return apiResponse.successResponseWithData(res,"Login Success.", userData);
 									}else {
-										return apiResponse.unauthorizedResponse(res, "Account is not active. Please contact admin.");
+										return apiResponse.unauthorizedResponse(res, Strings.staticLabel.en.error.error_14);
 									}
 								}else{
-									return apiResponse.unauthorizedResponse(res, "Account is not confirmed. Please confirm your account.");
+									return apiResponse.unauthorizedResponse(res, Strings.staticLabel.en.error.error_15);
 								}
 							}else{
-								return apiResponse.unauthorizedResponse(res, "Email or Password wrong.");
+								return apiResponse.unauthorizedResponse(res, Strings.staticLabel.en.error.error_16);
 							}
 						});
 					}else{
-						return apiResponse.unauthorizedResponse(res, "Email or Password wrong.");
+						return apiResponse.unauthorizedResponse(res, Strings.staticLabel.en.error.error_16);
 					}
 				});
 			}
@@ -187,9 +187,9 @@ exports.login = [
  * @returns {Object}
  */
 exports.verifyConfirm = [
-	body("email").isLength({ min: 1 }).trim().withMessage("Email must be specified.")
-		.isEmail().withMessage("Email must be a valid email address."),
-	body("otp").isLength({ min: 1 }).trim().withMessage("OTP must be specified."),
+	body("email").isLength({ min: 1 }).trim().withMessage(Strings.staticLabel.en.error.error_5)
+		.isEmail().withMessage(Strings.staticLabel.en.error.error_6),
+	body("otp").isLength({ min: 1 }).trim().withMessage(Strings.staticLabel.en.error.error_17),
 	sanitizeBody("email").escape(),
 	sanitizeBody("otp").escape(),
 	(req, res) => {
@@ -212,15 +212,15 @@ exports.verifyConfirm = [
 								}).catch(err => {
 									return apiResponse.ErrorResponse(res, err);
 								});
-								return apiResponse.successResponse(res,"Account confirmed success.");
+								return apiResponse.successResponse(res, Strings.staticLabel.en.error.error_18);
 							}else{
-								return apiResponse.unauthorizedResponse(res, "Otp does not match");
+								return apiResponse.unauthorizedResponse(res, Strings.staticLabel.en.error.error_19);
 							}
 						}else{
-							return apiResponse.unauthorizedResponse(res, "Account already confirmed.");
+							return apiResponse.unauthorizedResponse(res, Strings.staticLabel.en.error.error_20);
 						}
 					}else{
-						return apiResponse.unauthorizedResponse(res, "Specified email not found.");
+						return apiResponse.unauthorizedResponse(res, Strings.staticLabel.en.error.error_21);
 					}
 				});
 			}
@@ -237,8 +237,8 @@ exports.verifyConfirm = [
  * @returns {Object}
  */
 exports.resendConfirmOtp = [
-	body("email").isLength({ min: 1 }).trim().withMessage("Email must be specified.")
-		.isEmail().withMessage("Email must be a valid email address."),
+	body("email").isLength({ min: 1 }).trim().withMessage(Strings.staticLabel.en.error.error_5)
+		.isEmail().withMessage(Strings.staticLabel.en.error.error_6),
 	sanitizeBody("email").escape(),
 	(req, res) => {
 		try {
@@ -267,14 +267,14 @@ exports.resendConfirmOtp = [
 								// Save user.
 								user.save(function (err) {
 									if (err) { return apiResponse.ErrorResponse(res, err); }
-									return apiResponse.successResponse(res,"Confirm otp sent.");
+									return apiResponse.successResponse(res, Strings.staticLabel.en.error.error_22);
 								});
 							});
 						}else{
-							return apiResponse.unauthorizedResponse(res, "Account already confirmed.");
+							return apiResponse.unauthorizedResponse(res, Strings.staticLabel.en.error.error_20);
 						}
 					}else{
-						return apiResponse.unauthorizedResponse(res, "Specified email not found.");
+						return apiResponse.unauthorizedResponse(res, Strings.staticLabel.en.error.error_21);
 					}
 				});
 			}

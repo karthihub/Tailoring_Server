@@ -29,7 +29,7 @@ If you consider my project as helpful stuff, You can appreciate me or my hard wo
 -   JWT Tokens, make requests with a token after login with `Authorization` header with value `Bearer yourToken` where `yourToken` will be returned in Login response.
 -   Pre-defined response structures with proper status codes.
 -   Included CORS.
--    **Book** example with **CRUD** operations.
+-    **Shop** example with **CRUD** operations.
 -   Validations added.
 -   Included API collection for Postman.
 -   Light-weight project.
@@ -83,14 +83,14 @@ npm install
 │   └── www
 ├── controllers
 │   ├── AuthController.js
-│   └── BookController.js
+│   └── ShopController.js
 ├── models
-│   ├── BookModel.js
+│   ├── ShopModel.js
 │   └── UserModel.js
 ├── routes
 │   ├── api.js
 │   ├── auth.js
-│   └── book.js
+│   └── shop.js
 ├── middlewares
 │   ├── jwt.js
 ├── helpers
@@ -101,7 +101,7 @@ npm install
 ├── test
 │   ├── testConfig.js
 │   ├── auth.js
-│   └── book.js
+│   └── shop.js
 └── public
     ├── index.html
     └── stylesheets

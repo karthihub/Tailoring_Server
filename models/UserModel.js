@@ -25,4 +25,4 @@ UserSchema
 		return this.firstName + " " + this.lastName;
 	});
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema, "_customer_m_table");

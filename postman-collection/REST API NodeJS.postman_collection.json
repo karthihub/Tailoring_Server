@@ -195,10 +195,10 @@
 			]
 		},
 		{
-			"name": "Book",
+			"name": "Shop",
 			"item": [
 				{
-					"name": "Book Store",
+					"name": "Shop Store",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -219,12 +219,12 @@
 							"urlencoded": [
 								{
 									"key": "title",
-									"value": "testing book ",
+									"value": "testing shop ",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "testing book desc",
+									"value": "testing shop desc",
 									"type": "text"
 								},
 								{
@@ -235,7 +235,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/book",
+							"raw": "http://localhost:3000/api/shop",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -243,14 +243,14 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"book"
+								"shop"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Book List",
+					"name": "Shop List",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -261,7 +261,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/book",
+							"raw": "http://localhost:3000/api/shop",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -269,14 +269,14 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"book"
+								"shop"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Book Detail",
+					"name": "Shop Detail",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -287,7 +287,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/book/5d43d14a246036209713e667",
+							"raw": "http://localhost:3000/api/shop/5d43d14a246036209713e667",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -295,7 +295,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"book",
+								"shop",
 								"5d43d14a246036209713e667"
 							]
 						}
@@ -303,7 +303,7 @@
 					"response": []
 				},
 				{
-					"name": "Book Update",
+					"name": "Shop Update",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -324,12 +324,12 @@
 							"urlencoded": [
 								{
 									"key": "title",
-									"value": "testing book 123 456",
+									"value": "testing shop 123 456",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "testing book desc 123 456",
+									"value": "testing shop desc 123 456",
 									"type": "text"
 								},
 								{
@@ -340,7 +340,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/book/5d43d753cdbdd1264291806c",
+							"raw": "http://localhost:3000/api/shop/5d43d753cdbdd1264291806c",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -348,7 +348,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"book",
+								"shop",
 								"5d43d753cdbdd1264291806c"
 							]
 						}
@@ -356,7 +356,7 @@
 					"response": []
 				},
 				{
-					"name": "Book Delete",
+					"name": "Shop Delete",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -367,7 +367,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/book/5d43d753cdbdd1264291806c",
+							"raw": "http://localhost:3000/api/shop/5d43d753cdbdd1264291806c",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -375,7 +375,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"book",
+								"shop",
 								"5d43d753cdbdd1264291806c"
 							]
 						}
